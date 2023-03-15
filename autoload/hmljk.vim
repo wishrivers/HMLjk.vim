@@ -50,6 +50,7 @@ function! hmljk#move(type)
         let l:goto = s:lookup_header(s:DOWN, l:cur)
     elseif a:type == 'K'
         let l:goto = s:lookup_header(s:UP, l:cur)
+        let l:goto = s:is_header_line(l:cur) ? l:goto : s:lookup_header(s:UP, l:goto) " lookup two times when start line is not a header. 2023-03-15 23:22:33
     endif
 
     " 2. goto
