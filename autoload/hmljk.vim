@@ -9,6 +9,11 @@ let s:UP = 0
 let s:DOWN = 1
 
 " FUNCTION
+function! s:is_header_line(num)
+    " num: line number 2023-03-15 22:57:23
+    return getline(a:num)[0] == '#'
+endfunction
+
 function! s:lookup_header(direction, start)
     " direction: 0-Up, 1-Down 2023-03-15 16:16:22
     let l:cur = a:start
@@ -27,7 +32,7 @@ function! hmljk#move(type)
     " H: begin, M: middle, L: end; K/J: prev/next header 2023-03-15 16:36:54
 
     " only support: '# Header' First Line and '.md' File Type
-    if getline("1")[0] != '#' && expand('%:e') != 'md'
+    if ! s:is_header_line(1) && expand('%:e') != 'md'
         echo "only support '.md' file"
         return
     endif
@@ -35,8 +40,9 @@ function! hmljk#move(type)
     " 1. Lookup prev/next Header
     let l:cur = line(".")
     if a:type == 'H'
-        let l:goto = s:lookup_header(s:UP, l:cur) + 1
+        let l:goto = s:is_header_line(l:cur) ? l:cur + 1 : s:lookup_header(s:UP, l:cur) + 1
     elseif a:type == 'M'
+        let l:cur = s:is_header_line(l:cur) ? l:cur + 1 : l:cur
         let l:goto = ( s:lookup_header(s:UP, l:cur) + s:lookup_header(s:DOWN, l:cur) ) / 2
     elseif a:type == 'L'
         let l:goto = s:lookup_header(s:DOWN, l:cur) - 1
