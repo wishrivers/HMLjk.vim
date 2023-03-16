@@ -26,3 +26,12 @@ $ git clone https://github.com/wishrivers/HMLjk.vim.git ~/.vim/pack/plugins/star
 `gl` move cursor to the **end** of this header section.
 `gj` move cursor to the **next** header section.
 `gk` move cursor to the **prev** header section.
+
+u can remap the keys in `~/.vimrc`:
+```bash
+nnoremap <leader>h :call hmljk#move('H')<cr>
+nnoremap <leader>m :call hmljk#move('M')<cr>
+nnoremap <leader>l :call hmljk#move('L')<cr>
+nnoremap <leader>j :call hmljk#move('J')<cr>
+nnoremap <leader>k :call hmljk#move('K')<cr>
+```
