@@ -3,6 +3,7 @@
 `Mind` __A Header is a Section__: A Document is divided into many sections by Markdown Header. so we need move cursor among the sections. _neither `j`/`k` move line by line, nor `H`/`M`/`L` move screen by screen_;
 we need move **section by section**. so, I write this little project. maybe it can help you, too.
 _Let we move easily and freely through a markdown document_.
+![intro](intro.webp)
 
 > HMLjk.vim is inspired by **vim `H` `M` `L`** key function.
 
