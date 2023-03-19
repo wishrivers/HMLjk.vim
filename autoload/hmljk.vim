@@ -21,7 +21,8 @@ function! s:lookup_header(direction, start)
 
     " search next header
     let l:next = a:direction == s:UP ? l:cur - 1 : l:cur + 1
-    while 0 < l:next && l:next <= l:max && getline(l:next)[0] != '#'
+    " non-secondary+ header, then continue lookup. support: shell comment 2023-03-19 09:29:06
+    while 1 < l:next && l:next <= l:max && getline(l:next)[0:1] != '##'
         let l:next = a:direction == s:UP ? l:next - 1 : l:next + 1
     endwhile
 
